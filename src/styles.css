@@ -1,0 +1,92 @@
+body {
+  background-color: black;
+}
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  color: lightcyan;
+  border: solid 1px cyan;
+}
+.keyboard {
+  position: relative;
+  margin: 10px auto;
+  width: 107px;
+  display: grid;
+  grid-template-columns: 33px 33px 33px;
+  grid-template-rows: auto;
+  grid-column-gap: 4px;
+  grid-row-gap: 4px;
+}
+.key {
+  background-color: grey;
+  font-size: 20px;
+  width: 33px;
+  height: 33px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px;
+  transition: all 0.1s;
+}
+.key:hover {
+  box-sizing: border-box;
+  font-weight: bold;
+  background-color: lightblue;
+  border: solid 1px black;
+}
+.Input__complex:nth-child(odd):before{
+  content: '+';
+  position: absolute;
+  text-align: left;
+  color: black;
+  left: 120%;
+  top: 0px;
+  display: block;
+}
+  .Input__complex:nth-child(odd){
+    counter-increment: list-counter;
+    }
+
+.Input__complex:nth-child(odd):after {
+  color: darkcyan;
+  content: 'Liczba' counter(list-counter);
+  font-size: 12px;
+  position: absolute;
+  text-align: left;
+  color: black;
+  left: 90%;
+  top: -70%;
+  display: block;
+}
+.Input__complex:nth-child(even):before {
+  content: 'i';
+  position: absolute;
+  text-align: left;
+  color: black;
+  left: 100%;
+  top: 0px;
+  display: block;
+}
+
+.Input__complex {
+  position: relative;
+}
+.input__complex {
+  position: relative;
+  width: 40px; 
+  float: left;
+}
+.screen {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  align-items: center;
+  margin: 20px auto;
+  width: 300px;
+  height: 60px;
+  background: darkcyan;
+  border-radius: 5px;
+  border: solid 2px cyan;
+  counter-reset: list-counter;
+}
