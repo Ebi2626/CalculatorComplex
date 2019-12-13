@@ -1,7 +1,7 @@
 {
-  "name": "new",
+  "name": "Calculator",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simple calculator to standard or complex number counting",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {

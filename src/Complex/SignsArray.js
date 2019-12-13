@@ -1,3 +1,3 @@
-const signs = ["+", "-", "*", "/", ".", "=", "%", "←"];
+const signs = ["+", "-", "*", "/", "=", "%", "←"];
 
 export default signs;

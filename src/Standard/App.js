@@ -183,7 +183,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Pierwszy reactowy kalkulator</h1>
+        <div onClick={this.props.back} className="back__button">Back</div>
+        <h1>Simple calcualtor</h1>
         <Input value={this.state.value} />
         <Keyboard function={this.changeValue} />
         <Rezultat rezultat={this.state.result} />

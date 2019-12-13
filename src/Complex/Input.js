@@ -8,11 +8,12 @@ class Input extends Component {
     };
   }
   render() {
+    let colorfull = this.props.color ? "input__complex--active" : "";
     return (
       <div className="Input__complex">
         <input
           type="text"
-          className="input__complex"
+          className={"input__complex " + colorfull}
           placeholder={this.props.value}
           disabled
         />

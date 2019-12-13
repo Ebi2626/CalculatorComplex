@@ -1,3 +1,10 @@
+* {
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+   -ms-user-select: none;
+       user-select: none;
+}
 body {
   background-color: black;
 }
@@ -7,6 +14,42 @@ body {
   color: lightcyan;
   border: solid 1px cyan;
 }
+.application__choosingMenu {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-width: 500px;
+  min-height: 400px;
+  color: white;
+  margin: 10px auto;
+}
+.application__options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0px;
+  margin: 5px auto; 
+}
+.application__option, .back__button {
+  display: block;
+  text-align: center;
+  width: 100px;
+  height: 30px;
+  margin: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: darkgrey;
+  transition: all .3s ease-in-out;
+}
+.application__option:hover, .back__button:hover {
+  background-color: darkcyan;
+}
+.application__option:active, .back__button:active {
+  transform:scale(.9);
+}
+
 .keyboard {
   position: relative;
   margin: 10px auto;
@@ -27,7 +70,7 @@ body {
   justify-content: center;
   align-items: center;
   border-radius: 2px;
-  transition: all 0.1s;
+  transition: all 0.2s linear;
 }
 .key:hover {
   box-sizing: border-box;
@@ -35,6 +78,10 @@ body {
   background-color: lightblue;
   border: solid 1px black;
 }
+.key:active {
+  transform: scale(.9);
+}
+
 .Input__complex:nth-child(odd):before{
   content: '+';
   position: absolute;
@@ -50,7 +97,7 @@ body {
 
 .Input__complex:nth-child(odd):after {
   color: darkcyan;
-  content: 'Liczba' counter(list-counter);
+  content: 'Number ' counter(list-counter);
   font-size: 12px;
   position: absolute;
   text-align: left;
@@ -77,6 +124,9 @@ body {
   width: 40px; 
   float: left;
 }
+.input__complex--active{
+  background-color: rgb(230, 240, 100);
+}
 .screen {
   display: flex;
   justify-content: space-around;
@@ -89,4 +139,34 @@ body {
   border-radius: 5px;
   border: solid 2px cyan;
   counter-reset: list-counter;
+}
+.control__buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  max-width: 300px;
+  align-items: center;
+  height: 50px;
+  margin: 5px auto;
+}
+.button {
+  width: 100px;
+  height: 30px;
+  font-size: 18px;
+  color: black;
+  background-color: grey;
+  border: solid 1px darkcyan;
+  border-radius: 5px;
+  padding-top: 5px;
+  text-align: center;
+  transition: all .2s ease-in-out;
+}
+.button:hover {
+  background-color: darkgrey;
+}
+.button:active {
+  transform: scale(.9);
+}
+.back__button {
+
 }
