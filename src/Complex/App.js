@@ -5,7 +5,6 @@
 // It makes my code easy to read and let me for catching errors in easy way
 // I hope you I'll like it :)
 
-
 // Application to making simplest counting at positive complex numbers (builded from integers)
 // It can handle adding, substracting, multiplying, dividing and counting module (%)
 // Logical map of application:
@@ -56,45 +55,55 @@ class App extends Component {
     this.errorLog = this.errorLog.bind(this);
     this.prevInput = this.prevInput.bind(this);
     this.nextInput = this.nextInput.bind(this);
+    this.showTips = this.showTips.bind(this);
   }
-  prevInput(){
+  showTips(){
+    
+  }
+  prevInput() {
     // Changing currentInput value into lower, log error if user try to choose value lower than 1
-    if (this.state.currentInput !== 1){
-      this.setState(prevState=>{
+    if (this.state.currentInput !== 1) {
+      this.setState(prevState => {
         let newCurrentInput = prevState.currentInput - 1;
-        return{
+        return {
           currentInput: newCurrentInput
-        }
-      })
+        };
+      });
     } else {
       this.setState({
         errorNumber: 6
-      })
+      });
     }
   }
-  nextInput(){
-        // Changing currentInput value into higher, log error if user try to choose value higher than 4
-    if (this.state.currentInput !== 4){
-      this.setState(prevState=>{
+  nextInput() {
+    // Changing currentInput value into higher, log error if user try to choose value higher than 4
+    if (this.state.currentInput !== 4) {
+      this.setState(prevState => {
         let newCurrentInput = prevState.currentInput + 1;
-        return{
+        return {
           currentInput: newCurrentInput
-        }
-      })
+        };
+      });
     } else {
       this.setState({
         errorNumber: 7
-      })
+      });
     }
-  } 
-  module(){
+  }
+  module() {
     // Counting module of current number
-    switch(this.state.currentInput){
+    switch (this.state.currentInput) {
       case 1 || 2:
-        this.setState(prevState=>{
-          let realPow = (prevState.number_1.real !== "0")? Math.pow(prevState.number_1.real, 2): 0;
-          let imaginaryPow = (prevState.number_1.imaginary !== "0")? Math.pow(prevState.number_1.imaginary, 2): 0;
-          let newVal = Math.sqrt((realPow + imaginaryPow)); 
+        this.setState(prevState => {
+          let realPow =
+            prevState.number_1.real !== "0"
+              ? Math.pow(prevState.number_1.real, 2)
+              : 0;
+          let imaginaryPow =
+            prevState.number_1.imaginary !== "0"
+              ? Math.pow(prevState.number_1.imaginary, 2)
+              : 0;
+          let newVal = Math.sqrt(realPow + imaginaryPow);
           return {
             number_1: {
               real: "0",
@@ -109,14 +118,20 @@ class App extends Component {
             errorNumber: null,
             resultImaginary: "0",
             resultReal: newVal
-          }
-        })
-      break;
+          };
+        });
+        break;
       case 3 || 4:
-        this.setState(prevState=>{
-          let realPow = (prevState.number_2.real !== "0")? Math.pow(prevState.number_2.real, 2): 0;
-          let imaginaryPow = (prevState.number_2.imaginary !== "0")? Math.pow(prevState.number_2.imaginary, 2): 0;
-          let newVal = Math.sqrt((realPow + imaginaryPow)); 
+        this.setState(prevState => {
+          let realPow =
+            prevState.number_2.real !== "0"
+              ? Math.pow(prevState.number_2.real, 2)
+              : 0;
+          let imaginaryPow =
+            prevState.number_2.imaginary !== "0"
+              ? Math.pow(prevState.number_2.imaginary, 2)
+              : 0;
+          let newVal = Math.sqrt(realPow + imaginaryPow);
           return {
             number_1: {
               real: "0",
@@ -131,372 +146,417 @@ class App extends Component {
             errorNumber: null,
             resultImaginary: "0",
             resultReal: newVal
-          }
-        })
-      break;
+          };
+        });
+        break;
       default:
         this.setState({
           errorNumber: 5
-        })
-      break;
+        });
+        break;
     }
   }
 
-  count(sign){
-    if (sign === ""){
+  count(sign) {
+    if (sign === "") {
       this.setState({
         errorNumber: 3
       });
     } else {
       // Chcecking type of sign and tryning count
-    switch(sign){
-      case "+":
-        this.setState(prevState => {
-          let nevReal = prevState.number_1.real + prevState.number_2.real;
-          let nevImaginary = prevState.number_1.imaginary + prevState.number_2.imaginary;
-          return {
-            sign: "",
-            resultReal: nevReal,
-            resultImaginary: nevImaginary,
-            currentInput: 1,
-            errorNumber: null,
-            number_1: {
-              real: "0",
-              imaginary: "0"
-            },
-            number_2: {
-              real: "0",
-              imaginary: "0"
-            }
-          }
-        })
-      break;
-      case "-":
-        this.setState(prevState => {
-          let nevReal = prevState.number_1.real - prevState.number_2.real;
-          let nevImaginary = prevState.number_1.imaginary - prevState.number_2.imaginary;
-          return {
-            sign: "",
-            resultReal: nevReal,
-            resultImaginary: nevImaginary,
-            currentInput: 1,
-            errorNumber: null,
-            number_1: {
-              real: "0",
-              imaginary: "0"
-            },
-            number_2: {
-              real: "0",
-              imaginary: "0"
-            }
-          }
-        })
-      break;
-      case "*":
-        this.setState(prevState => {
-          let nevReal = (prevState.number_1.real * prevState.number_2.real) - (prevState.number_1.imaginary * prevState.number_2.imaginary);
-          let nevImaginary = (prevState.number_1.real * prevState.number_2.imaginary) + (prevState.number_1.imaginary * prevState.number_2.real);
-          return {
-            sign: "",
-            resultReal: nevReal,
-            resultImaginary: nevImaginary,
-            currentInput: 1,
-            errorNumber: null,
-            number_1: {
-              real: "0",
-              imaginary: "0"
-            },
-            number_2: {
-              real: "0",
-              imaginary: "0"
-            }
-          }
-        })
-      break;
-      case "/":
-        this.setState(prevState => {
-          let nevReal = (prevState.number_1.real * prevState.number_2.real) + (prevState.number_1.imaginary * prevState.number_2.imaginary);
-          let denominator =  (prevState.number_2.real * prevState.number_2.real) + (prevState.number_2.imaginary * prevState.number_2.imaginary);
-          nevReal = nevReal/denominator;
-          let nevImaginary = (prevState.number_1.imaginary * prevState.number_2.real) - (prevState.number_1.real * prevState.number_2.imaginary);
-          nevImaginary = nevImaginary/denominator;
-          return {
-            sign: "",
-            resultReal: nevReal,
-            resultImaginary: nevImaginary,
-            currentInput: 1,
-            errorNumber: null,
-            number_1: {
-              real: "0",
-              imaginary: "0"
-            },
-            number_2: {
-              real: "0",
-              imaginary: "0"
-            }
-          }
-        })
-      break;
-      default:
-        this.setState({
-          errorNumber: 4
-        });
-      break;
-    }
-    }
-  }
-  saveSign(val){
-    // If user click "=" application try to count inputted value using sing saved in state of appliaction
-    if (val === "="){
-      this.count(this.state.sign);
-      } else {
-        switch(val){
-          // If user click this back arrow, application try to work like a backspace
-          case "←":
-            switch(this.state.currentInput){
-              case 1:
-                this.setState(prevState => {
-                  let prevVal = String(prevState.number_1.real);
-                  let nevVal = (prevVal.length < 2) ? "0" : prevState.number_1.real.slice(0,-1);
-                  console.log("Długośc stringa: " + prevVal.length);
-                  console.log("wartość do wpisania: " + nevVal);
-                  return {
-                    number_1: {
-                      real: nevVal,
-                      imaginary: prevState.number_1.imaginary
-                    }
-                  }
-                })
-              break;
-              case 2:
-                this.setState(prevState => {
-                  let prevVal = String(prevState.number_1.imaginary);
-                  let nevVal = (prevVal.length < 2) ? "0" : prevState.number_1.imaginary.slice(0,-1);
-                  console.log("Długośc stringa: " + prevVal.length);
-                  console.log("wartość do wpisania: " + nevVal);
-                  return {
-                    number_1: {
-                      imaginary: nevVal,
-                      real: prevState.number_1.real
-                    }
-                  }
-                })
-              break;
-              case 3:
-                this.setState(prevState => {
-                  let prevVal = String(prevState.number_2.real);
-                  let nevVal = (prevVal.length < 2) ? "0" : prevState.number_2.real.slice(0,-1);
-                  console.log("Długośc stringa: " + prevVal.length);
-                  console.log("wartość do wpisania: " + nevVal);
-                  return {
-                    number_2: {
-                      real: nevVal,
-                      imaginary: prevState.number_2.imaginary
-                    }
-                  }
-                })
-              break;
-              case 4:
-                this.setState(prevState => {
-                  let prevVal = String(prevState.number_2.imaginary);
-                  let nevVal = (prevVal.length < 2) ? "0" : prevState.number_2.imaginary.slice(0,-1);
-                  console.log("Długośc stringa: " + prevVal.length);
-                  console.log("wartość do wpisania: " + nevVal);
-                  return {
-                    number_2: {
-                      imaginary: nevVal,
-                      real: prevState.number_2.real
-                    }
-                  }
-                })
-              break;
-              default:
-                this.setState({
-                  errorNumber: 2
-                });
-              break;
-            }
-          break;
-          case "%":
-          this.module();
-          break;
-          default:
-            this.setState({
-              sign: val
-            });
-        }
-      }
-  }
-  trimZero(){
-    // this method try to remove zero from first position in the current input
-    switch(this.state.currentInput){
-      case 1:
-        if((this.state.number_1.real.charAt(0) === 0) || (this.state.number_1.real.charAt(0) === "0")){
+      switch (sign) {
+        case "+":
           this.setState(prevState => {
-            let nevVal = prevState.number_1.real.substr(1);
-            if (nevVal !== undefined){
+            let nevReal = prevState.number_1.real + prevState.number_2.real;
+            let nevImaginary =
+              prevState.number_1.imaginary + prevState.number_2.imaginary;
             return {
+              sign: "",
+              resultReal: nevReal,
+              resultImaginary: nevImaginary,
+              currentInput: 1,
+              errorNumber: null,
               number_1: {
-                real: nevVal,
-                imaginary: prevState.number_1.imaginary
-              }
-            }
-          }
-          })
-        }
-        break;
-        case 2:
-        if((this.state.number_1.imaginary.charAt(0) === 0) || (this.state.number_1.imaginary.charAt(0) === "0")){
-          this.setState(prevState => {
-            let nevVal = prevState.number_1.imaginary.substr(1);
-            if (nevVal !== undefined){
-            return {
-              number_1: {
-                imaginary: nevVal,
-                real: prevState.number_1.real
-              }
-            }
-          }
-          })
-        }
-        break;
-        case 3:
-        if((this.state.number_2.real.charAt(0) === 0) || (this.state.number_2.real.charAt(0) === "0")){
-          this.setState(prevState => {
-            let nevVal = prevState.number_2.real.substr(1);
-            if (nevVal !== undefined){
-            return {
+                real: "0",
+                imaginary: "0"
+              },
               number_2: {
-                real: nevVal,
-                imaginary: prevState.number_2.imaginary
+                real: "0",
+                imaginary: "0"
               }
-            }
-          }
+            };
           });
-        }
-        break;
-        case 4:
-        if((this.state.number_2.imaginary.charAt(0) === 0) || (this.state.number_2.imaginary.charAt(0) === "0")){
+          break;
+        case "-":
           this.setState(prevState => {
-            let nevVal = prevState.number_2.imaginary.substr(1);
-            if (nevVal !== undefined){
+            let nevReal = prevState.number_1.real - prevState.number_2.real;
+            let nevImaginary =
+              prevState.number_1.imaginary - prevState.number_2.imaginary;
             return {
+              sign: "",
+              resultReal: nevReal,
+              resultImaginary: nevImaginary,
+              currentInput: 1,
+              errorNumber: null,
+              number_1: {
+                real: "0",
+                imaginary: "0"
+              },
               number_2: {
-                imaginary: nevVal,
-                real: prevState.number_2.real
+                real: "0",
+                imaginary: "0"
               }
-            }
-          }
-          })
-        }
-        break;
+            };
+          });
+          break;
+        case "*":
+          this.setState(prevState => {
+            let nevReal =
+              prevState.number_1.real * prevState.number_2.real -
+              prevState.number_1.imaginary * prevState.number_2.imaginary;
+            let nevImaginary =
+              prevState.number_1.real * prevState.number_2.imaginary +
+              prevState.number_1.imaginary * prevState.number_2.real;
+            return {
+              sign: "",
+              resultReal: nevReal,
+              resultImaginary: nevImaginary,
+              currentInput: 1,
+              errorNumber: null,
+              number_1: {
+                real: "0",
+                imaginary: "0"
+              },
+              number_2: {
+                real: "0",
+                imaginary: "0"
+              }
+            };
+          });
+          break;
+        case "/":
+          this.setState(prevState => {
+            let nevReal =
+              prevState.number_1.real * prevState.number_2.real +
+              prevState.number_1.imaginary * prevState.number_2.imaginary;
+            let denominator =
+              prevState.number_2.real * prevState.number_2.real +
+              prevState.number_2.imaginary * prevState.number_2.imaginary;
+            nevReal = nevReal / denominator;
+            let nevImaginary =
+              prevState.number_1.imaginary * prevState.number_2.real -
+              prevState.number_1.real * prevState.number_2.imaginary;
+            nevImaginary = nevImaginary / denominator;
+            return {
+              sign: "",
+              resultReal: nevReal,
+              resultImaginary: nevImaginary,
+              currentInput: 1,
+              errorNumber: null,
+              number_1: {
+                real: "0",
+                imaginary: "0"
+              },
+              number_2: {
+                real: "0",
+                imaginary: "0"
+              }
+            };
+          });
+          break;
         default:
           this.setState({
-            errorNumber: 0
+            errorNumber: 4
           });
-          console.log("Error numer: 0");
+          break;
+      }
+    }
+  }
+  saveSign(val) {
+    // If user click "=" application try to count inputted value using sing saved in state of appliaction
+    if (val === "=") {
+      this.count(this.state.sign);
+    } else {
+      switch (val) {
+        // If user click this back arrow, application try to work like a backspace
+        case "←":
+          switch (this.state.currentInput) {
+            case 1:
+              this.setState(prevState => {
+                let prevVal = String(prevState.number_1.real);
+                let nevVal =
+                  prevVal.length < 2
+                    ? "0"
+                    : prevState.number_1.real.slice(0, -1);
+                console.log("Długośc stringa: " + prevVal.length);
+                console.log("wartość do wpisania: " + nevVal);
+                return {
+                  number_1: {
+                    real: nevVal,
+                    imaginary: prevState.number_1.imaginary
+                  }
+                };
+              });
+              break;
+            case 2:
+              this.setState(prevState => {
+                let prevVal = String(prevState.number_1.imaginary);
+                let nevVal =
+                  prevVal.length < 2
+                    ? "0"
+                    : prevState.number_1.imaginary.slice(0, -1);
+                console.log("Długośc stringa: " + prevVal.length);
+                console.log("wartość do wpisania: " + nevVal);
+                return {
+                  number_1: {
+                    imaginary: nevVal,
+                    real: prevState.number_1.real
+                  }
+                };
+              });
+              break;
+            case 3:
+              this.setState(prevState => {
+                let prevVal = String(prevState.number_2.real);
+                let nevVal =
+                  prevVal.length < 2
+                    ? "0"
+                    : prevState.number_2.real.slice(0, -1);
+                console.log("Długośc stringa: " + prevVal.length);
+                console.log("wartość do wpisania: " + nevVal);
+                return {
+                  number_2: {
+                    real: nevVal,
+                    imaginary: prevState.number_2.imaginary
+                  }
+                };
+              });
+              break;
+            case 4:
+              this.setState(prevState => {
+                let prevVal = String(prevState.number_2.imaginary);
+                let nevVal =
+                  prevVal.length < 2
+                    ? "0"
+                    : prevState.number_2.imaginary.slice(0, -1);
+                console.log("Długośc stringa: " + prevVal.length);
+                console.log("wartość do wpisania: " + nevVal);
+                return {
+                  number_2: {
+                    imaginary: nevVal,
+                    real: prevState.number_2.real
+                  }
+                };
+              });
+              break;
+            default:
+              this.setState({
+                errorNumber: 2
+              });
+              break;
+          }
+          break;
+        case "%":
+          this.module();
+          break;
+        default:
+          this.setState({
+            sign: val
+          });
+      }
+    }
+  }
+  trimZero() {
+    // this method try to remove zero from first position in the current input
+    switch (this.state.currentInput) {
+      case 1:
+        if (
+          this.state.number_1.real.charAt(0) === 0 ||
+          this.state.number_1.real.charAt(0) === "0"
+        ) {
+          this.setState(prevState => {
+            let nevVal = prevState.number_1.real.substr(1);
+            if (nevVal !== undefined) {
+              return {
+                number_1: {
+                  real: nevVal,
+                  imaginary: prevState.number_1.imaginary
+                }
+              };
+            }
+          });
+        }
+        break;
+      case 2:
+        if (
+          this.state.number_1.imaginary.charAt(0) === 0 ||
+          this.state.number_1.imaginary.charAt(0) === "0"
+        ) {
+          this.setState(prevState => {
+            let nevVal = prevState.number_1.imaginary.substr(1);
+            if (nevVal !== undefined) {
+              return {
+                number_1: {
+                  imaginary: nevVal,
+                  real: prevState.number_1.real
+                }
+              };
+            }
+          });
+        }
+        break;
+      case 3:
+        if (
+          this.state.number_2.real.charAt(0) === 0 ||
+          this.state.number_2.real.charAt(0) === "0"
+        ) {
+          this.setState(prevState => {
+            let nevVal = prevState.number_2.real.substr(1);
+            if (nevVal !== undefined) {
+              return {
+                number_2: {
+                  real: nevVal,
+                  imaginary: prevState.number_2.imaginary
+                }
+              };
+            }
+          });
+        }
+        break;
+      case 4:
+        if (
+          this.state.number_2.imaginary.charAt(0) === 0 ||
+          this.state.number_2.imaginary.charAt(0) === "0"
+        ) {
+          this.setState(prevState => {
+            let nevVal = prevState.number_2.imaginary.substr(1);
+            if (nevVal !== undefined) {
+              return {
+                number_2: {
+                  imaginary: nevVal,
+                  real: prevState.number_2.real
+                }
+              };
+            }
+          });
+        }
+        break;
+      default:
+        this.setState({
+          errorNumber: 0
+        });
+        console.log("Error numer: 0");
         break;
     }
   }
-  changeValue(e){
+  changeValue(e) {
     this.trimZero();
     // Application get value of button clicked by user thanks to it's "innerHTML"
     // Then check if it is special sign, if true then it call method saveSign otherwise it add value into input as a string
     let val = e.target.innerHTML;
     let specialSign;
-    function test(a){
-      if (a === val){
+    function test(a) {
+      if (a === val) {
         specialSign = "yes";
         return specialSign;
-      } 
+      }
     }
-    for (let i=0; i < Signs.length; i++){
+    for (let i = 0; i < Signs.length; i++) {
       test(Signs[i]);
     }
-    if (specialSign === "yes" ){
+    if (specialSign === "yes") {
       this.saveSign(val);
     } else {
-    switch(this.state.currentInput){
-      case 1:
-        this.setState(prevState => {
-          let nevVal = prevState.number_1.real + "" + val;
-          return {
-            number_1: {
-              real: nevVal,
-              imaginary: prevState.number_1.imaginary
-
-          }
-        }
-      });
-      break;
-      case 2:
-        this.setState(prevState => {
-          let nevVal = prevState.number_1.imaginary + "" + val;
-          return {
-            number_1: {
-              imaginary: nevVal,
-              real: prevState.number_1.real
-          }
-        }
-      });
-      break;
-      case 3:
-        this.setState(prevState => {
-          let nevVal = prevState.number_2.real + "" + val;
-          return {
-            number_2: {
-              real: nevVal,
-              imaginary: prevState.number_2.imaginary
-          }
-        }
-      });
-      break;
-      case 4:
-        this.setState(prevState => {
-          let nevVal = prevState.number_2.imaginary + "" + val;
-          return {
-            number_2: {
-              imaginary: nevVal,
-              real: prevState.number_2.real
-          }
-        }
-      });
-      break;
-      default:
+      switch (this.state.currentInput) {
+        case 1:
+          this.setState(prevState => {
+            let nevVal = prevState.number_1.real + "" + val;
+            return {
+              number_1: {
+                real: nevVal,
+                imaginary: prevState.number_1.imaginary
+              }
+            };
+          });
+          break;
+        case 2:
+          this.setState(prevState => {
+            let nevVal = prevState.number_1.imaginary + "" + val;
+            return {
+              number_1: {
+                imaginary: nevVal,
+                real: prevState.number_1.real
+              }
+            };
+          });
+          break;
+        case 3:
+          this.setState(prevState => {
+            let nevVal = prevState.number_2.real + "" + val;
+            return {
+              number_2: {
+                real: nevVal,
+                imaginary: prevState.number_2.imaginary
+              }
+            };
+          });
+          break;
+        case 4:
+          this.setState(prevState => {
+            let nevVal = prevState.number_2.imaginary + "" + val;
+            return {
+              number_2: {
+                imaginary: nevVal,
+                real: prevState.number_2.real
+              }
+            };
+          });
+          break;
+        default:
           this.setState({
             errorNumber: 0
           });
           console.log("Error numer: 1");
-        break;
+          break;
+      }
     }
   }
-}
-errorLog(){
-  if(this.state.errorNumber !== null){
-    console.log("Error number: " + this.state.errorNumber);
+  errorLog() {
+    if (this.state.errorNumber !== null) {
+      console.log("Error number: " + this.state.errorNumber);
+    }
   }
-}
   render() {
     this.errorLog();
     return (
       <div className="App">
-        <div onClick={this.props.back} className="back__button">Back</div>
+        <div onClick={this.props.back} className="back__button">
+          Back
+        </div>
+        <div className="complex__tooltip" onClick={this.showTips}>?</div>
         <h1>Simple Caluclator for Complex Numbers</h1>
-        <Screen n1r={this.state.number_1.real} n1i={this.state.number_1.imaginary} n2r={this.state.number_2.real} n2i={this.state.number_2.imaginary} color={this.state.currentInput}>
-        </Screen>
+        <Screen
+          n1r={this.state.number_1.real}
+          n1i={this.state.number_1.imaginary}
+          n2r={this.state.number_2.real}
+          n2i={this.state.number_2.imaginary}
+          color={this.state.currentInput}
+        />
         <div className="control__buttons">
           <Button function={this.prevInput} value="Previous" />
           <Button function={this.nextInput} value="Next" />
         </div>
         <Keyboard function={this.changeValue} />
-        <Result resultReal={this.state.resultReal} resultImaginary={this.state.resultImaginary} />
+        <Result
+          resultReal={this.state.resultReal}
+          resultImaginary={this.state.resultImaginary}
+        />
       </div>
     );
   }
 }
 
 export default App;
-
 
 /* Error numbers:
 

@@ -2,8 +2,8 @@
   box-sizing: border-box;
   -webkit-user-select: none;
   -moz-user-select: none;
-   -ms-user-select: none;
-       user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 body {
   background-color: black;
@@ -13,6 +13,7 @@ body {
   text-align: center;
   color: lightcyan;
   border: solid 1px cyan;
+  padding: 10px;
 }
 .application__choosingMenu {
   display: flex;
@@ -30,9 +31,10 @@ body {
   justify-content: space-around;
   align-items: center;
   padding: 0px;
-  margin: 5px auto; 
+  margin: 5px auto;
 }
-.application__option, .back__button {
+.application__option,
+.back__button {
   display: block;
   text-align: center;
   width: 100px;
@@ -41,13 +43,15 @@ body {
   padding: 5px;
   border-radius: 5px;
   background-color: darkgrey;
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
-.application__option:hover, .back__button:hover {
+.application__option:hover,
+.back__button:hover {
   background-color: darkcyan;
 }
-.application__option:active, .back__button:active {
-  transform:scale(.9);
+.application__option:active,
+.back__button:active {
+  transform: scale(0.9);
 }
 
 .keyboard {
@@ -79,11 +83,11 @@ body {
   border: solid 1px black;
 }
 .key:active {
-  transform: scale(.9);
+  transform: scale(0.9);
 }
 
-.Input__complex:nth-child(odd):before{
-  content: '+';
+.Input__complex:nth-child(odd):before {
+  content: "+";
   position: absolute;
   text-align: left;
   color: black;
@@ -91,13 +95,13 @@ body {
   top: 0px;
   display: block;
 }
-  .Input__complex:nth-child(odd){
-    counter-increment: list-counter;
-    }
+.Input__complex:nth-child(odd) {
+  counter-increment: list-counter;
+}
 
 .Input__complex:nth-child(odd):after {
   color: darkcyan;
-  content: 'Number ' counter(list-counter);
+  content: "Number" counter(list-counter);
   font-size: 12px;
   position: absolute;
   text-align: left;
@@ -107,7 +111,7 @@ body {
   display: block;
 }
 .Input__complex:nth-child(even):before {
-  content: 'i';
+  content: "i";
   position: absolute;
   text-align: left;
   color: black;
@@ -121,10 +125,10 @@ body {
 }
 .input__complex {
   position: relative;
-  width: 40px; 
+  width: 40px;
   float: left;
 }
-.input__complex--active{
+.input__complex--active {
   background-color: rgb(230, 240, 100);
 }
 .screen {
@@ -134,7 +138,7 @@ body {
   align-items: center;
   margin: 20px auto;
   width: 300px;
-  height: 60px;
+  height: 80px;
   background: darkcyan;
   border-radius: 5px;
   border: solid 2px cyan;
@@ -159,14 +163,34 @@ body {
   border-radius: 5px;
   padding-top: 5px;
   text-align: center;
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 .button:hover {
   background-color: darkgrey;
 }
 .button:active {
-  transform: scale(.9);
+  transform: scale(0.9);
 }
-.back__button {
-
+.complex__tooltip {
+  position: relative;
+  display: block;
+  margin-right: 10px;
+  margin-left: auto;
+  top: -45px;
+  padding: 5px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  background-color: lightgray;
+  color: lightseagreen;
+  border: solid 1px black;
+  border-radius: 50%;
+  transition: background-color 0.2s linear;
+}
+.complex__tooltip:hover {
+  color: black;
+  background-color: cyan;
+}
+.complex__tooltip:active {
+  transform: scale(0.9);
 }
