@@ -28,6 +28,7 @@ import Signs from "./SignsArray";
 import Result from "./Result";
 import Screen from "./Screen";
 import Button from "./Button";
+import Tip from "./Tip";
 
 class App extends Component {
   constructor() {
@@ -45,6 +46,7 @@ class App extends Component {
       sign: "",
       resultReal: "0",
       resultImaginary: "0",
+      tip: 0,
       errorNumber: null
     };
     this.changeValue = this.changeValue.bind(this);
@@ -57,8 +59,44 @@ class App extends Component {
     this.nextInput = this.nextInput.bind(this);
     this.showTips = this.showTips.bind(this);
   }
-  showTips(){
-    
+  showTips() {
+    this.setState(prevState => {
+      if (prevState.tip === 0) {
+        return {
+          number_1: {
+            real: prevState.number_1.real,
+            imaginary: prevState.number_1.imaginary
+          },
+          number_2: {
+            real: prevState.number_2.real,
+            imaginary: prevState.number_2.imaginary
+          },
+          currentInput: prevState.currentInput,
+          sign: prevState.sign,
+          resultReal: prevState.resultReal,
+          resultImaginary: prevState.resultImaginary,
+          tip: 1,
+          errorNumber: prevState.errorNumber
+        };
+      } else if (prevState.tip === 1) {
+        return {
+          number_1: {
+            real: prevState.number_1.real,
+            imaginary: prevState.number_1.imaginary
+          },
+          number_2: {
+            real: prevState.number_2.real,
+            imaginary: prevState.number_2.imaginary
+          },
+          currentInput: prevState.currentInput,
+          sign: prevState.sign,
+          resultReal: prevState.resultReal,
+          resultImaginary: prevState.resultImaginary,
+          tip: 0,
+          errorNumber: prevState.errorNumber
+        };
+      }
+    });
   }
   prevInput() {
     // Changing currentInput value into lower, log error if user try to choose value lower than 1
@@ -93,17 +131,18 @@ class App extends Component {
   module() {
     // Counting module of current number
     switch (this.state.currentInput) {
-      case 1 || 2:
+      case 1:
+      case 2:
         this.setState(prevState => {
           let realPow =
             prevState.number_1.real !== "0"
-              ? Math.pow(prevState.number_1.real, 2)
+              ? Math.pow(prevState.number_1.real * 1, 2)
               : 0;
           let imaginaryPow =
             prevState.number_1.imaginary !== "0"
-              ? Math.pow(prevState.number_1.imaginary, 2)
+              ? Math.pow(prevState.number_1.imaginary * 1, 2)
               : 0;
-          let newVal = Math.sqrt(realPow + imaginaryPow);
+          let newVal = Math.sqrt(realPow + imaginaryPow).toFixed(4);
           return {
             number_1: {
               real: "0",
@@ -121,17 +160,18 @@ class App extends Component {
           };
         });
         break;
-      case 3 || 4:
+      case 3:
+      case 4:
         this.setState(prevState => {
           let realPow =
             prevState.number_2.real !== "0"
-              ? Math.pow(prevState.number_2.real, 2)
+              ? Math.pow(prevState.number_2.real * 1, 2)
               : 0;
           let imaginaryPow =
             prevState.number_2.imaginary !== "0"
-              ? Math.pow(prevState.number_2.imaginary, 2)
+              ? Math.pow(prevState.number_2.imaginary * 1, 2)
               : 0;
-          let newVal = Math.sqrt(realPow + imaginaryPow);
+          let newVal = Math.sqrt(realPow + imaginaryPow).toFixed(4);
           return {
             number_1: {
               real: "0",
@@ -167,9 +207,11 @@ class App extends Component {
       switch (sign) {
         case "+":
           this.setState(prevState => {
-            let nevReal = prevState.number_1.real + prevState.number_2.real;
+            let nevReal =
+              prevState.number_1.real * 1 + prevState.number_2.real * 1;
             let nevImaginary =
-              prevState.number_1.imaginary + prevState.number_2.imaginary;
+              prevState.number_1.imaginary * 1 +
+              prevState.number_2.imaginary * 1;
             return {
               sign: "",
               resultReal: nevReal,
@@ -189,9 +231,10 @@ class App extends Component {
           break;
         case "-":
           this.setState(prevState => {
-            let nevReal = prevState.number_1.real - prevState.number_2.real;
+            let nevReal = prevState.number_1.real * 1 - prevState.number_2.real;
             let nevImaginary =
-              prevState.number_1.imaginary - prevState.number_2.imaginary;
+              prevState.number_1.imaginary * 1 -
+              prevState.number_2.imaginary * 1;
             return {
               sign: "",
               resultReal: nevReal,
@@ -288,8 +331,6 @@ class App extends Component {
                   prevVal.length < 2
                     ? "0"
                     : prevState.number_1.real.slice(0, -1);
-                console.log("Długośc stringa: " + prevVal.length);
-                console.log("wartość do wpisania: " + nevVal);
                 return {
                   number_1: {
                     real: nevVal,
@@ -530,10 +571,13 @@ class App extends Component {
     this.errorLog();
     return (
       <div className="App">
+        <Tip tip={this.state.tip} />
         <div onClick={this.props.back} className="back__button">
           Back
         </div>
-        <div className="complex__tooltip" onClick={this.showTips}>?</div>
+        <div className="complex__tooltip" onClick={this.showTips}>
+          {this.state.tip === 1 ? "X" : "?"}
+        </div>
         <h1>Simple Caluclator for Complex Numbers</h1>
         <Screen
           n1r={this.state.number_1.real}

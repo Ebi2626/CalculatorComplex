@@ -33,7 +33,9 @@ class App extends Component {
     let result;
     switch (sign) {
       case "+":
-        result = Number(this.state.firstValue) + Number(this.state.secondValue);
+        result = (
+          Number(this.state.firstValue) + Number(this.state.secondValue)
+        ).toFixed(4);
         this.setState({
           result: result,
           value: "0",
@@ -42,7 +44,9 @@ class App extends Component {
         });
         break;
       case "-":
-        result = this.state.firstValue - this.state.secondValue;
+        result = (
+          Number(this.state.firstValue) - Number(this.state.secondValue)
+        ).toFixed(4);
         this.setState({
           result: result,
           value: "0",
@@ -51,7 +55,9 @@ class App extends Component {
         });
         break;
       case "*":
-        result = this.state.firstValue * this.state.secondValue;
+        result = (
+          Number(this.state.firstValue) * Number(this.state.secondValue)
+        ).toFixed(4);
         this.setState({
           result: result,
           value: "0",
@@ -60,7 +66,9 @@ class App extends Component {
         });
         break;
       case "/":
-        result = this.state.firstValue / this.state.secondValue;
+        result = (
+          Number(this.state.firstValue) / Number(this.state.secondValue)
+        ).toFixed(4);
         this.setState({
           result: result,
           value: "0",
@@ -69,7 +77,9 @@ class App extends Component {
         });
         break;
       case "%":
-        result = this.state.firstValue % this.state.secondValue;
+        result = (
+          Number(this.state.firstValue) % Number(this.state.secondValue)
+        ).toFixed(4);
         this.setState({
           result: result,
           value: "0",
@@ -183,7 +193,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div onClick={this.props.back} className="back__button">Back</div>
+        <div onClick={this.props.back} className="back__button">
+          Back
+        </div>
         <h1>Simple calcualtor</h1>
         <Input value={this.state.value} />
         <Keyboard function={this.changeValue} />
